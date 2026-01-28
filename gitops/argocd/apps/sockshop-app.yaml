@@ -5,13 +5,24 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/emreeaarslan/sock-shop-gitops.git
-    targetRevision: main
-    path: apps/sockshop
+
   destination:
     server: https://kubernetes.default.svc
     namespace: sock-shop
+
+  sources:
+    - repoURL: https://github.com/emreeaarslan/microservices-demo.git
+      targetRevision: main
+      path: helm-chart
+      helm:
+        releaseName: sockshop
+        valueFiles:
+          - $values/apps/sockshop/values.yaml
+
+    - repoURL: https://github.com/emreeaarslan/sock-shop-gitops.git
+      targetRevision: main
+      ref: values
+
   syncPolicy:
     automated:
       prune: true
