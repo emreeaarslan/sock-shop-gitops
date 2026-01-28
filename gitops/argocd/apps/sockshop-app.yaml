@@ -23,6 +23,11 @@ spec:
       targetRevision: main
       ref: values
 
+    - repoURL: https://github.com/emreeaarslan/sock-shop-gitops.git
+      targetRevision: main
+      path: apps/sockshop
+
+
   syncPolicy:
     automated:
       prune: true
